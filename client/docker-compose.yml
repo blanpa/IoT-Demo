@@ -1,0 +1,29 @@
+################################################################################
+# Clients
+################################################################################
+# 
+# blanpa
+################################################################################
+version: "3"
+
+services:
+  mosquitto-server:
+    command:
+    - --restart=always
+    - --name=mosquitto-server
+    - eclipse-mosquitto:1.6.15
+    container_name: mosquitto-server
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+    image: \
+    ports:
+    - 1883:1883
+    - 9001:9001
+    stdin_open: true
+    tty: true
+    volumes:
+    - mosquitto_conf:/mosquitto/config
+    - mosquitto_data:/mosquitto/data
+    - mosquitto_log:/mosquitto/log
